@@ -1,0 +1,33 @@
+class FibonacciRunnable implements Runnable {
+    private int n;
+
+    public FibonacciRunnable(int n) {
+        this.n = n;
+    }
+
+    @Override
+    public void run() {
+        generateFibonacci(n);
+    }
+
+    private void generateFibonacci(int count) {
+        int num1 = 0, num2 = 1;
+        System.out.print("Fibonacci Series of " + count + " numbers: ");
+
+        for (int i = 1; i <= count; ++i) {
+            System.out.print(num1 + " ");
+
+            // Compute the next term
+            int sumOfPrevTwo = num1 + num2;
+            num1 = num2;
+            num2 = sumOfPrevTwo;
+        }
+    }
+
+    public static void main(String[] args) {
+        int n = 10; // The number of Fibonacci numbers to generate
+        FibonacciRunnable fibonacciRunnable = new FibonacciRunnable(n);
+        Thread thread = new Thread(fibonacciRunnable);
+        thread.start();
+    }
+}
